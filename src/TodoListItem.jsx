@@ -6,18 +6,12 @@ import TodoList from './TodoList';
 import AddTodoForm from './AddTodoForm'; 
 
 
-function App() {
-  const [newTodo, setNewTodo] = useState("")
+function TodoListItem(props) {
 
   return (
-    <div>
-      <h1>Todo List</h1>
-      <TodoList />
-      <AddTodoForm onAddTodo={setNewTodo}/>
-      <p>New Todo: {newTodo}</p>
-    </div>
+    <li>{props.todo}</li>
   );
 }
 
-export default App;
+export default TodoListItem;
 
