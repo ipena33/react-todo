@@ -1,20 +1,33 @@
 // Functional react component
-import React from 'react';
+import React, { useState } from 'react';
 
-const AddTodoForm = (props) => {
+
+
+const AddTodoForm = ({onAddTodo}) => {
+    // state variable
+    const [todoTitle, setTodoTitle] = useState("");
+
+    function handleTitleChange(event) {
+        const newTodoTitle = event.target.value;
+        setTodoTitle(newTodoTitle);
+    }
+
     function handleAddTodo(event) {
         event.preventDefault(); //prevents default form submission
-        const todoTitle = event.target.title.value;
         console.log("Todo Title:", todoTitle);
-        props.onAddTodo(todoTitle);
+        const newTodo = {  //todo object with title and id
+            title: todoTitle,
+            id: Date.now(),
+        };
+        onAddTodo(newTodo); //new object added to callback
         // reset form so input is cleared
-        event.target.reset(); 
+        setTodoTitle(""); 
     }
 
     return(
         <form onSubmit={handleAddTodo}>
-            <label htmlFor="Title"></label>
-            <input name="title" type="text" id="Title"/>
+            <label htmlFor="Title">Title</label>
+            <input name="title" type="text" id="Title" value={todoTitle} onChange={handleTitleChange}/>
             <button type="submit">Add</button>
         </form>
         

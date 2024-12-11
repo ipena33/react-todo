@@ -6,10 +6,10 @@ import TodoList from './TodoList';
 import AddTodoForm from './AddTodoForm'; 
 
 
-function TodoListItem(props) {
+function TodoListItem(todo) {
 
   return (
-    <li>{props.todo}</li>
+    <li>{todo}</li>
   );
 }
 
