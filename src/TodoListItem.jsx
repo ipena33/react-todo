@@ -6,12 +6,13 @@ import TodoList from './TodoList';
 import AddTodoForm from './AddTodoForm'; 
 
 
-function TodoListItem(todo) {
-
-  return (
-    <li>{todo}</li>
-  );
-}
+const TodoListItem = ({ todo }) => {
+  //with todo.title, does not display and with todo, displays properly
+  return <li>{todo}</li>;
+};
 
 export default TodoListItem;
+
+
+
 
