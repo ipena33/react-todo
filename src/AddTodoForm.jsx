@@ -1,5 +1,6 @@
 // Functional react component
 import React, { useState } from 'react';
+import InputWithLabel from './InputWithLabel'; 
 
 
 
@@ -26,13 +27,14 @@ const AddTodoForm = ({onAddTodo}) => {
 
     return(
         <form onSubmit={handleAddTodo}>
-            <label htmlFor="Title">Title</label>
-            <input name="title" type="text" id="Title" value={todoTitle} onChange={handleTitleChange}/>
+            <InputWithLabel todoTitle={todoTitle} handleTitleChange={handleTitleChange}>
+                Title {/* passing title as children*/}
+            </InputWithLabel>
             <button type="submit">Add</button>
         </form>
         
     );
-}
+};
 
 
 export default AddTodoForm;
