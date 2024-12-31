@@ -6,25 +6,43 @@ import TodoList from './TodoList';
 import AddTodoForm from './AddTodoForm'; 
 
 
-function useSemiPersistentState(){
-    // state function holds list of todos
-    const [todoList, setTodoList] = useState(() => {
-    const savedTodoList = localStorage.getItem("savedTodoList");
-    return savedTodoList ? JSON.parse(savedTodoList) : [];
-  });
+
+function App() {
+  // const [todoList, setTodoList] = useState(() => {
+  // const savedTodoList = localStorage.getItem("savedTodoList");
+  // return savedTodoList ? JSON.parse(savedTodoList) : [];
+  // });
+
+  // state function holds list of todos
+  const [todoList, setTodoList] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+
+  useEffect(() => {
+    new Promise((resolve, reject) => {
+      // mimic loading delay
+      setTimeout(() => {
+        //calling parameter resolve which is a callback function for when Promise is successful
+        resolve( {data: {todoList : JSON.parse(localStorage.getItem("savedTodoList"))}} ) //pass object with property data as a nested empty object
+      }, 2000);
+    })
+    .then((result) => {
+      setTodoList(result.data.todoList)
+      // turn loading off once data has been fetched
+      setIsLoading(false);
+    });
+  }, []); //empty dependency array
 
   // save the todoList to localStorage so it stays after refreshing
   useEffect(() => {
-    localStorage.setItem("savedTodoList", JSON.stringify(todoList));
+
+    if (isLoading != true){
+      localStorage.setItem("savedTodoList", JSON.stringify(todoList));
+    }
   }, [todoList]);
-
-  return [todoList, setTodoList];
+ 
+  //return [todoList, setTodoList];
   
-}
-
-function App() {
-
-  const [todoList, setTodoList] = useSemiPersistentState ();
 
   function addTodo(newTodo){
     // add new items and keep old items too
@@ -39,8 +57,12 @@ function App() {
 
   return (
     <>
-      <h1>Todo List</h1>
-      <TodoList todoList={todoList} onRemoveTodo={removeTodo}/>
+      <h1>Todo List</h1> 
+      {/* Using a ternary operator inside JSX, if isLoading is true render the loading message, otherwise render the TodoList component */}
+      { isLoading ? 
+      (<p>Loading...</p>) 
+      : <TodoList todoList={todoList} onRemoveTodo={removeTodo}/>
+      }
       <AddTodoForm onAddTodo={addTodo}/>
     </>
   );
