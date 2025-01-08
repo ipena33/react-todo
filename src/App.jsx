@@ -34,7 +34,7 @@ function App() {
         const message = `Error: ${response.status}`;
         throw new Error(message);
       }
-      const data = await JSON.stringify(response.json());
+      const data = await response.json();
       // console.log(JSON.stringify(data));
       console.log(data);
 
