@@ -14,20 +14,13 @@ function App() {
 
 
   const fetchData = async() => {
-    const url = `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/${import.meta.env.VITE_TABLE_NAME}`;
     const options = {
-      method: "GET",
+      method: 'GET',
       headers: {
-        Authorization: `Bearer ${import.meta.env.VITE_AIRTABLE_API_TOKEN}}`,
-      }
-    }; 
-
-    console.log(options); 
-    console.log(import.meta.env.VITE_AIRTABLE_API_TOKEN);
-    console.log(import.meta.env.VITE_AIRTABLE_BASE_ID);
-    console.log(import.meta.env.VITE_TABLE_NAME);
-
-
+        'Authorization': `Bearer ${import.meta.env.VITE_AIRTABLE_API_TOKEN}`}
+    } 
+    const url = 
+      `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/${import.meta.env.VITE_TABLE_NAME}`;
     try {
       const response = await fetch(options, url);
       if (!response.ok) {
@@ -35,8 +28,29 @@ function App() {
         throw new Error(message);
       }
       const data = await response.json();
-      // console.log(JSON.stringify(data));
       console.log(data);
+      console.log(options); 
+      console.log(import.meta.env.VITE_AIRTABLE_API_TOKEN);
+      console.log(import.meta.env.VITE_AIRTABLE_BASE_ID);
+      console.log(import.meta.env.VITE_TABLE_NAME);
+      const todos = data.records.map((record) => {
+          const newTodo = {
+              id: record.id,
+              title: record.fields.title
+          }
+          return newTodo;
+          });
+          setTodoList(todos);
+          setIsLoading(false);
+ 
+    } catch (error) {
+        console.log(error.message);
+    }
+  }  //fetchData ends  ### !!!!
+
+
+
+
 
 
       // #################    after I fix 404 error, I will uncomment this block ######################################
@@ -51,10 +65,6 @@ function App() {
       // ####################################################################################################################
 
 
-    } catch (error) {
-      console.log(error.message)
-    }
-  };
  
   useEffect(() => {
     fetchData();
@@ -74,7 +84,6 @@ function App() {
 
   // save the todoList to localStorage so it stays after refreshing
   useEffect(() => {
-
     if (isLoading != true){
       localStorage.setItem("savedTodoList", JSON.stringify(todoList));
     }
