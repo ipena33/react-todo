@@ -17,12 +17,12 @@ function App() {
     const options = {
       method: 'GET',
       headers: {
-        'Authorization': `Bearer ${import.meta.env.VITE_AIRTABLE_API_TOKEN}`}
+        'Authorization': `Bearer ${import.meta.env.VITE_AIRTABLE_API_TOKEN}`}           
     } 
     const url = 
       `https://api.airtable.com/v0/${import.meta.env.VITE_AIRTABLE_BASE_ID}/${import.meta.env.VITE_TABLE_NAME}`;
     try {
-      const response = await fetch(options, url);
+      const response = await fetch(url, options);
       if (!response.ok) {
         const message = `Error: ${response.status}`;
         throw new Error(message);
