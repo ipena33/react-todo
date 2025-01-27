@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg';
 import './App.css';
 import TodoList from './TodoList'; 
 import AddTodoForm from './AddTodoForm'; 
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 
 
@@ -47,39 +48,9 @@ function App() {
         console.log(error.message);
     }
   }  //fetchData ends  ### !!!!
-
-
-
-
-
-
-      // #################    after I fix 404 error, I will uncomment this block ######################################
-      // const todos = data.records.map((record) => (
-      //   {
-      //     id: record.id,
-      //     name: record.fields.title,
-      // }))
-      // console.log(todos);
-      // setTodoList(todos);
-      // setIsLoading(false);
-      // ####################################################################################################################
-
-
  
   useEffect(() => {
     fetchData();
-    // new Promise((resolve, reject) => {
-    //   // mimic loading delay
-    //   setTimeout(() => {
-    //     //calling parameter resolve which is a callback function for when Promise is successful
-    //     resolve( {data: {todoList : JSON.parse(localStorage.getItem("savedTodoList"))}} ) //pass object with property data as a nested empty object
-    //   }, 2000);
-    // })
-    // .then((result) => {
-    //   setTodoList(result.data.todoList)
-    //   // turn loading off once data has been fetched
-    //   setIsLoading(false);
-    // });
   }, []); //empty dependency array (useffect only fires once on each mount)
 
   // save the todoList to localStorage so it stays after refreshing
@@ -103,16 +74,33 @@ function App() {
     setTodoList(newTodoList);
   }
 
+
   return (
-    <>
-      <h1>Todo List</h1> 
-      {/* Using a ternary operator inside JSX, if isLoading is true render the loading message, otherwise render the TodoList component */}
-      { isLoading ? 
-      (<p>Loading...</p>) 
-      : <TodoList todoList={todoList} onRemoveTodo={removeTodo}/>
-      }
-      <AddTodoForm onAddTodo={addTodo}/>
-    </>
+  
+      <BrowserRouter>
+        <Routes>
+          <Route 
+            path="/"
+            element={
+              <>
+                <h1>Todo List</h1> 
+                {/* Using a ternary operator inside JSX, if isLoading is true render the loading message, otherwise render the TodoList component */}
+              { isLoading ? (
+              <p>Loading...</p> ) 
+              : (<TodoList todoList={todoList} onRemoveTodo={removeTodo} />
+              )}
+              <AddTodoForm onAddTodo={addTodo}/>
+              </>
+            }     
+          />
+          <Route
+            path="/new"
+            element={
+              <h1>New Todo List</h1> 
+            }
+          />
+        </Routes>
+      </BrowserRouter>
   );
 }
 
