@@ -4,12 +4,12 @@ import viteLogo from '/vite.svg';
 import './App.css';
 import TodoList from './TodoList'; 
 import AddTodoForm from './AddTodoForm'; 
-
+import style from './TodoListItem.module.css';
 
 const TodoListItem = ({ todo, onRemoveTodo }) => {
   //with todo.title, does not display and with todo, displays properly
   return (
-  <li>
+  <li className= {style.ListItem}>
     {todo.title}
     <button type="button" onClick={() => onRemoveTodo(todo.id)}>Remove</button>
   </li>
