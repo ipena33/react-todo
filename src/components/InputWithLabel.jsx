@@ -1,5 +1,6 @@
 // Functional react component
 import React, { useEffect , useRef} from 'react';
+import PropTypes from 'prop-types';
 
 
 
@@ -15,6 +16,13 @@ function InputWithLabel( {todoTitle, handleTitleChange, children} ){
             <input name="title" type="text" id="Title" value={todoTitle} onChange={handleTitleChange} ref={inputRef}/>
         </>
     );
-}
+};
+
+InputWithLabel.propTypes = {
+    todoTitle: PropTypes.string.isRequired,
+    handleTitleChange: PropTypes.func.isRequired,
+    children: PropTypes.node.isRequired,
+};
+
 
 export default InputWithLabel;
