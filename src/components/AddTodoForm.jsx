@@ -1,6 +1,7 @@
 // Functional react component
 import React, { useState } from 'react';
 import InputWithLabel from './InputWithLabel'; 
+import PropTypes from 'prop-types';
 
 
 
@@ -34,6 +35,10 @@ const AddTodoForm = ({onAddTodo}) => {
         </form>
         
     );
+};
+
+AddTodoForm.propTypes = {
+    onAddTodo: PropTypes.func.isRequired,
 };
 
 
