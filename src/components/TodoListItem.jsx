@@ -12,7 +12,7 @@ const TodoListItem = ({ todo, onRemoveTodo }) => {
   return (
   <li className= {style.ListItem}>
     {todo.title}
-    <button type="button" onClick={() => onRemoveTodo(todo.id)}>Remove</button>
+    <button className="remove-button" type="button" onClick={() => onRemoveTodo(todo.id)}>remove</button>
   </li>
   );
 };

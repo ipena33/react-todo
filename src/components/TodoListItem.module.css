@@ -2,18 +2,27 @@
 
 
 .ListItem {
-    color: grey;
+    /* color: grey; */
+    color: teal;
     margin-bottom: 10px; /* Adds space between items */
     list-style-type: square;
-    padding-left: 5px; 
+    padding-left: 20px; 
+    font-weight: 700;
+    text-align: left;
+    font-size: 18px; 
+    /* display: flex; */
+    /* justify-content: space-between; 
+    align-items: center; Aligns the text and button vertically */
+
 }
 
 body {
     background-color: lightblue;
     color: white;
     font-family: 'Quicksand', sans-serif;
-    padding: 20px;
-    font-size: 18px;
+    padding: 0;
+    font-size: 20px;  
+    margin: 0px;
 
 }
 
@@ -21,12 +30,20 @@ h1, h2 {
     font-size: 40px;
     font-weight: 700;
     color: teal;
+    padding: 30px;
+    margin-top: 0px;
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 input {
-    width: 100%; /* Full width */
+    width: 80%; 
     padding: 10px;
-    margin: 10px 0;
+    margin: 10px;
     border: 2px solid teal; /* Blue border */
     border-radius: 5px;
     font-size: 16px;
@@ -35,9 +52,9 @@ input {
 
 
 button {
-    background-color: teal; /* Blue background */
+    background-color: grey; /* Blue background */
     color: white; /* White text */
-    padding: 10px 15px;
+    padding: 10px 10px;
     border: none;
     border-radius: 5px;
     font-size: 16px;
@@ -47,8 +64,6 @@ button {
     font-family: 'Quicksand', sans-serif;
     margin-left: 10px; /* Adds space to the left of the button */
 }
-
-
 
 /* Styles for tablets (widths between 600px and 1024px) */
 @media screen and (max-width: 1024px) {

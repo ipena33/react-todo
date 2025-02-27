@@ -29,7 +29,7 @@ const AddTodoForm = ({onAddTodo}) => {
     return(
         <form onSubmit={handleAddTodo}>
             <InputWithLabel todoTitle={todoTitle} handleTitleChange={handleTitleChange}>
-                Title {/* passing title as children*/}
+                Todo {/* passing title as children*/}
             </InputWithLabel>
             <button type="submit">Add</button>
         </form>
